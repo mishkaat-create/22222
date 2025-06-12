@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday, Fee!</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #7c3aed 0%, #ede9fe 100%);
+      font-family: 'Georgia', serif;
+      color: #f5f3ff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      min-height: 100vh;
+    }
+    main {
+      flex: 1;
+      max-width: 700px;
+      padding: 40px 30px;
+      background: rgba(59, 7, 100, 0.85);
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.6);
+      overflow-y: auto;
+    }
+    aside {
+      width: 320px;
+      background: #faf5ff;
+      color: #3b0764;
+      padding: 30px 20px;
+      box-shadow: inset 5px 0 10px -5px rgba(124, 58, 237, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+    header h1 {
+      font-size: 3em;
+      margin: 0 0 10px;
+      text-align: center;
+      color: #e0d7ff;
+      text-shadow: 0 0 8px #a78bfa;
+    }
+    header p {
+      font-size: 1.2em;
+      font-style: italic;
+      margin: 0 0 30px;
+      text-align: center;
+      color: #d8cfff;
+    }
+    .poem-box {
+      background: #6d28d9;
+      border-radius: 12px;
+      padding: 25px 30px;
+      font-size: 1.3em;
+      line-height: 1.5em;
+      box-shadow: 0 0 20px #9d7eddaa;
+      margin-bottom: 30px;
+      white-space: pre-line;
+      user-select: none;
+    }
+    .btn {
+      background-color: #7c3aed;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      margin: 10px 5px 20px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 10px #7c3aedaa;
+      user-select: none;
+    }
+    .btn:hover {
+      background-color: #5b21b6;
+    }
+    .question {
+      background: #8b5cf6;
+      margin-bottom: 25px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #c4b5fdaa;
+      user-select: none;
+    }
+    .question p {
+      margin: 0 0 15px;
+      font-weight: 600;
+    }
+    .answers button {
+      margin: 5px 10px 0 0;
+    }
+    .correct {
+      background-color: #16a34a !important;
+      box-shadow: 0 0 12px #22c55e !important;
+    }
+    .wrong {
+      background-color: #dc2626 !important;
+      box-shadow: 0 0 12px #ef4444 !important;
+    }
+    .secret-message {
+      background: #5b21b6cc;
+      margin: 20px 0;
+      padding: 15px;
+      border-radius: 10px;
+      font-style: italic;
+      font-weight: 700;
+      text-align: center;
+      user-select: none;
+      box-shadow: 0 0 15px #8b5cf6cc;
+    }
+    textarea {
+      width: 100%;
+      height: 80px;
+      border-radius: 8px;
+      border: none;
+      padding: 12px;
+      font-family: Georgia, serif;
+      font-size: 1em;
+      margin-bottom: 15px;
+      resize: none;
+      box-shadow: 0 0 10px #7c3aedaa inset;
+    }
+    .meme-img {
+      border-radius: 12px;
+      max-width: 100%;
+      margin-top: 15px;
+      box-shadow: 0 5px 15px #7c3aedaa;
+      user-select: none;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #d8cfff;
+      font-style: italic;
+      user-select: none;
+    }
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <header>
+      <h1>Happy Birthday, Fee! 🎂</h1>
+      <p><strong>“Challenge Accepted.”</strong></p>
+    </header>
+
+    <section class="poem-box" aria-label="Heartfelt Poem">
+I see you and you see codes...
+You keep typing while I munch on toasts...
+I go to sleep while you stay up... all engrossed, to crack a bug.
+And when I am up, you go to sleep...
+It's been long, we hardly meet...
+But that’s okay, it’s just 2 months,
+And I’m sure, when you’re done...
+The smile on your face won’t go away.
+Then we will hit a buffet...
+Your face will shine, your body will heal...
+And it'll be the best I ever feel
+    </section>
+
+    <section id="quiz-container">
+      <div class="question" id="q1">
+        <p>1. Fee encounters a bug. What does he say?</p>
+        <div class="answers">
+          <button class="btn" onclick="checkAnswer(this, true, 'bugSecret')">“Challenge Accepted.”</button>
+          <button class="btn" onclick="checkAnswer(this, false)">“Nope, I’m out.”</button>
+        </div>
+      </div>
+
+      <div class="question" id="q2">
+        <p>2. Fee sees a cat meme. What does he do?</p>
+        <div class="answers">
+          <button class="btn" onclick="checkAnswer(this, true)">Save & send it</button>
+          <button class="btn" onclick="checkAnswer(this, false)">Ignore it</button>
+        </div>
+      </div>
+
+      <div class="question" id="q3">
+        <p>3. Fee sometimes says <em>“Main to mast chiz hu!”</em>. How do you respond?</p>
+        <div class="answers">
+          <button class="btn" onclick="checkAnswer(this, true)">“Nyaaaaaaa!”</button>
+          <button class="btn" onclick="checkAnswer(this, false)">“Hmm, sure.”</button>
+        </div>
+      </div>
+
+      <div class="question" id="q4">
+        <p>4. What’s Fee’s favorite way to relax after coding?</p>
+        <div class="answers">
+          <button class="btn" onclick="checkAnswer(this, true)">Playing “It Takes Two” together</button>
+          <button class="btn" onclick="checkAnswer(this, false)">Watching TV alone</button>
+        </div>
+      </div>
+
+      <div class="question" id="q5">
+        <p>5. Senua, the game we played together, is about:</p>
+        <div class="answers">
+          <button class="btn" onclick="checkAnswer(this, true)">Facing inner demons bravely</button>
+          <button class="btn" onclick="checkAnswer(this, false)">A space adventure</button>
+        </div>
+      </div>
+
+      <div class="question" id="q6">
+        <p>6. What sound does Fee make when happy?</p>
+        <div class="answers">
+          <button class="btn" onclick="checkAnswer(this, true)">“Meow!”</button>
+          <button class="btn" onclick="checkAnswer(this, false)">“Bark!”</button>
+        </div>
+      </div>
+
+      <div class="question" id="q7">
+        <p>7. Fee’s friend’s guinea pig does what most of the time?</p>
+        <div class="answers">
+          <button class="btn" onclick="checkAnswer(this, true)">Poops and sleeps like it’s dead</button>
+          <button class="btn" onclick="checkAnswer(this, false)">Runs marathons daily</button>
+        </div>
+      </div>
+
+      <div class="question" id="q8">
+        <p>8. Fee’s secret to staying motivated is?</p>
+        <div class="answers">
+          <button class="btn" onclick="checkAnswer(this, true)">“Challenge Accepted!” attitude</button>
+          <button class="btn" onclick="checkAnswer(this, false)">Giving up quickly</button>
+        </div>
+      </div>
+
+      <div class="question" id="q9">
+        <p>9. What’s Fee’s favorite cat sound?</p>
+        <div class="answers">
+          <button class="btn" onclick="checkAnswer(this, true)">“Nyaaaaaaa!”</button>
+          <button class="btn" onclick="checkAnswer(this, false)">“Woof!”</button>
+        </div>
+      </div>
+
+      <div class="question" id="q10">
+        <p>10. Fee's favorite meme animal besides cats?</p>
+        <div class="answers">
+          <button class="btn" onclick="checkAnswer(this, true)">Guinea pig</button>
+          <button class="btn" onclick="checkAnswer(this, false)">Dog</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="secretMessages" class="secret-message hidden"></div>
+
+    <footer>
+      <p>Forever yours,<br>Your favorite human and wifey Mish 💜</p>
+    </footer>
+  </main>
+
+  <aside aria-label="Side Panel with Memes and Music">
+    <h2>🐱 Cute Cat Meme</h2>
+    <img class="meme-img" src="https://i.imgur.com/Vq9hP8O.jpeg" alt="Cute cat meme" />
+
+    <h2>🐹 Funny Guinea Pig Meme</h2>
+    <img class="meme-img" src="https://i.imgur.com/RoG0gI0.jpeg" alt="Guinea pig sleeping like dead meme" />
+
+    <audio id="bg-music" loop>
+      <source src="https://cdn.pixabay.com/download/audio/2022/02/22/audio_1d8e1d0d98.mp3?filename=jaana-tere-sawalo-ka-manzar-tu-6419.mp3" type="audio/mp3" />
+      <!-- Replace the above src with the real song link if you have it -->
+    </audio>
+    <button class="btn" onclick="toggleMusic()">🎵 Play / Pause Song</button>
+  </aside>
+
+<script>
+  // Play/pause background music
+  function toggleMusic() {
+    const music = document.getElementById("bg-music");
+    if (music.paused) {
+      music.play();
+    } else {
+      music.pause();
+    }
+  }
+
+  // Play meow sound on correct answer
+  const meowSound = new Audio('https://www.soundjay.com/animal/cat-meow-2.mp3');
+
+  function checkAnswer(button, isCorrect, secretKey = null) {
+    if(button.disabled) return;
+
+    // Disable all sibling buttons in this question
+    const siblings = button.parentElement.querySelectorAll('button');
+    siblings.forEach(b => b.disabled = true);
+
+    if(isCorrect) {
+      button.classList.add('correct');
+      button.innerText += ' ✅';
+      meowSound.currentTime = 0;
+      meowSound.play();
+      if(secretKey) {
+        showSecret(secretKey);
+      }
+    } else {
+      button.classList.add('wrong');
+      button.innerText += ' ❌';
+    }
+  }
+
+  // Secret messages dictionary
+  const secrets = {
+    bugSecret: `Every time you solve a bug, my heart feels full and I can't be more happier.. I am so proud of you!!`,
+    playItTakesTwo: `Well played! I too can't wait to play "It Takes Two" with you!!`,
+    sexyWork: `I love it when you get lost in your work.. you look the sexiest that way!!!`
+  };
+
+  function showSecret(key) {
+    const container = document.getElementById('secretMessages');
+    container.innerText = secrets[key];
+    container.classList.remove('hidden');
+    setTimeout(() => {
+      container.classList.add('hidden');
+      container.innerText = '';
+    }, 7000);
+  }
+</script>
+
+</body>
+</html>
